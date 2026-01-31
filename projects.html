@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-github-user="Lily010304">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projects — Layla Alsaabna</title>
+    <meta name="description" content="Projects across data analysis, machine learning, web development, and AI." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Inter:wght@300..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/style.css" />
+    <script src="assets/main.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" role="banner">
+      <div class="wrap header-inner">
+        <a class="brand" href="index.html" aria-label="Home">
+          <span class="brand-mark" aria-hidden="true">✶</span>
+          <span class="brand-text">Layla Alsaabna</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a class="nav-link" href="index.html" data-nav="home">Home</a>
+          <a class="nav-link" href="projects.html" data-nav="projects">Projects</a>
+          <a class="nav-link" href="about.html" data-nav="about">About</a>
+          <a class="nav-link" href="resume.html" data-nav="resume">Resume</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="site-main" role="main">
+      <section class="page-head">
+        <div class="wrap">
+          <p class="kicker">Projects</p>
+          <h1 class="display">Case studies & builds</h1>
+          <p class="lede">A growing set of work—each one optimized for clarity, speed, and impact.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="filters" aria-label="Project filters">
+            <button class="chip" type="button" data-filter="all">All</button>
+            <button class="chip" type="button" data-filter="data">Data</button>
+            <button class="chip" type="button" data-filter="ml">ML</button>
+            <button class="chip" type="button" data-filter="web">Web</button>
+            <button class="chip" type="button" data-filter="ai">AI</button>
+          </div>
+
+          <div class="status" id="projectsStatus" aria-live="polite">Loading projects from GitHub…</div>
+          <div class="cards" id="projectGrid" data-source="github"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="wrap footer-inner">
+        <div>© <span id="year"></span> Layla Alsaabna</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="resume.html">Resume</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
