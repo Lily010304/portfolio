@@ -378,6 +378,21 @@ a:hover {
   display: grid;
   gap: 12px;
   min-height: 190px;
+  overflow: hidden;
+}
+
+.card-media {
+  margin: -16px -16px 0;
+}
+
+.card-img {
+  width: 100%;
+  height: 160px;
+  display: block;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(27, 11, 30, 0.1);
+  border-top-left-radius: calc(var(--radius) - 1px);
+  border-top-right-radius: calc(var(--radius) - 1px);
 }
 
 .card-title {

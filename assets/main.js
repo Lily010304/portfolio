@@ -43,6 +43,38 @@
     return String(value);
   };
 
+  const normalizeKey = (value) => safeText(value).trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+
+  const LOCAL_PROJECT_IMAGES = Object.freeze({
+    'computervision': 'assets/images/Computer-Vision.png',
+    'datavisualizationfirstproject': 'assets/images/Data-Visualization-First-Project.jpg',
+    'datavisualizationsecondmidproject': 'assets/images/Data-Visualization-Second-MidProject.jpg',
+    'drignazsemmelweis': 'assets/images/Dr.-Ignaz-Semmelweis.png',
+    'fbigun': 'assets/images/FBI-Gun.jpg',
+    'finaludacityproject': 'assets/images/Final-Udacity-Project.jpg',
+    'finalsecondproject': 'assets/images/finalSecondProject.png',
+    'findingdonors': 'assets/images/Finding-Donors.jpg',
+    'flappybird': 'assets/images/Flappy-Bird.png',
+    'genzsummarizer': 'assets/images/Genz_Summarizer.png',
+    'homicide': 'assets/images/homicide.jpg',
+    'sherlock': 'assets/images/sherlock.jpg',
+    'sugarinyourblood': 'assets/images/SugarInYourBlood.jpg',
+    'thirdprojectdv': 'assets/images/ThirdProjectDV.jpg',
+    'timeloom': 'assets/images/time-loom.png',
+    'youtuberagqa': 'assets/images/Youtube_RAG_QA.png',
+  });
+
+  const getLocalProjectImageUrl = (repoName) => {
+    const key = normalizeKey(repoName);
+    const relativePath = LOCAL_PROJECT_IMAGES[key];
+    if (!relativePath) return null;
+    try {
+      return new URL(relativePath, document.baseURI).toString();
+    } catch {
+      return relativePath;
+    }
+  };
+
   const guessKind = (repo) => {
     const name = safeText(repo.name).toLowerCase();
     const desc = safeText(repo.description).toLowerCase();
@@ -78,6 +110,25 @@
     article.className = 'card';
     article.dataset.kind = kind;
 
+    const imgUrl = getLocalProjectImageUrl(title);
+    if (imgUrl) {
+      const media = document.createElement('div');
+      media.className = 'card-media';
+
+      const img = document.createElement('img');
+      img.className = 'card-img';
+      img.src = imgUrl;
+      img.alt = `${title} project preview`;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.addEventListener('error', () => {
+        media.remove();
+      });
+
+      media.appendChild(img);
+      article.appendChild(media);
+    }
+
     const head = document.createElement('div');
     head.className = 'card-head';
 
@@ -105,7 +156,6 @@
 
     tags.appendChild(mkTag(formatKindLabel(kind)));
     if (language) tags.appendChild(mkTag(language));
-    if (repo.fork) tags.appendChild(mkTag('Fork'));
     if (stars > 0) tags.appendChild(mkTag(`★ ${stars}`));
 
     const links = document.createElement('div');
@@ -157,17 +207,20 @@
     statusEl,
     user,
     mode,
+    requireImages,
   }) => {
     try {
       const repos = await fetchRepos(user);
 
       const filtered = repos
         .filter((r) => r && !r.archived)
-        .filter((r) => (mode === 'featured' ? !r.fork : true))
+        .filter((r) => !r.fork)
         .filter((r) => (mode === 'featured' ? safeText(r.name).toLowerCase() !== user.toLowerCase() : true))
         .filter((r) => safeText(r.name).toLowerCase() !== `${user}`.toLowerCase());
 
-      const sorted = filtered
+      const withImages = filtered.filter((r) => (requireImages ? Boolean(getLocalProjectImageUrl(r?.name)) : true));
+
+      const sorted = withImages
         .slice()
         .sort((a, b) => {
           const ap = Date.parse(a.pushed_at || '') || 0;
@@ -227,7 +280,8 @@
 
     const user = getGitHubUser();
     if (user) {
-      renderGitHubList({ grid, statusEl, user, mode: 'all' }).then(() => applyFilter(selectedKind));
+      const requireImages = (grid.dataset.requireImages || '').toLowerCase() === 'true';
+      renderGitHubList({ grid, statusEl, user, mode: 'all', requireImages }).then(() => applyFilter(selectedKind));
     } else if (statusEl) {
       statusEl.textContent = 'Missing GitHub username (data-github-user).';
     }
@@ -239,7 +293,8 @@
   if (featuredGrid) {
     const user = getGitHubUser();
     if (user) {
-      renderGitHubList({ grid: featuredGrid, statusEl: featuredStatus, user, mode: 'featured' });
+      const requireImages = (featuredGrid.dataset.requireImages || '').toLowerCase() === 'true';
+      renderGitHubList({ grid: featuredGrid, statusEl: featuredStatus, user, mode: 'featured', requireImages });
     } else if (featuredStatus) {
       featuredStatus.textContent = 'Missing GitHub username (data-github-user).';
     }
