@@ -45,6 +45,15 @@
 
   const normalizeKey = (value) => safeText(value).trim().toLowerCase().replace(/[^a-z0-9]/g, '');
 
+  const FEATURED_REPOS = Object.freeze([
+    'ragapp',
+    'youtuberagqa',
+    'genzsummarizer',
+    'finalsecondproject',
+    'datavisualizationsecondmidproject',
+    'fbigun',
+  ]);
+
   const LOCAL_PROJECT_OVERRIDES = Object.freeze({
     ragapp: {
       description:
@@ -229,6 +238,24 @@
 
       const withImages = filtered.filter((r) => (requireImages ? Boolean(getLocalProjectImageUrl(r?.name)) : true));
 
+      if (mode === 'featured') {
+        const byKey = new Map(withImages.map((r) => [normalizeKey(r?.name), r]));
+        const chosenFeatured = FEATURED_REPOS.map((key) => byKey.get(key)).filter(Boolean);
+
+        grid.innerHTML = '';
+        for (const repo of chosenFeatured) {
+          grid.appendChild(createProjectCard(repo));
+        }
+
+        if (statusEl) {
+          statusEl.textContent = chosenFeatured.length
+            ? ''
+            : 'No featured repos found. Check repo visibility and names.';
+        }
+
+        return;
+      }
+
       const sorted = withImages
         .slice()
         .sort((a, b) => {
@@ -240,7 +267,7 @@
           return bs - as;
         });
 
-      const chosen = mode === 'featured' ? sorted.slice(0, 6) : sorted;
+      const chosen = sorted;
 
       grid.innerHTML = '';
       for (const repo of chosen) {
