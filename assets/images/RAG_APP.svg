@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="RAG_APP thumbnail">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4e8"/>
+      <stop offset="1" stop-color="#fffaf3"/>
+    </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="5" r="2" fill="#d1a3df" opacity="0.7"/>
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="675" rx="36" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="675" rx="36" fill="url(#dots)" opacity="0.35"/>
+
+  <rect x="70" y="78" width="1060" height="519" rx="28" fill="#fff4e8" stroke="#1b0b1e" stroke-opacity="0.18" stroke-width="3"/>
+
+  <g fill="#2a0d2f">
+    <text x="120" y="220" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="64" font-weight="800" letter-spacing="0.5">RAG_APP</text>
+    <text x="120" y="285" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="26" font-weight="650" fill="#3a1242" opacity="0.95">PDF ingest • Qdrant • Gemini • Inngest • Streamlit</text>
+  </g>
+
+  <g transform="translate(120 355)">
+    <rect x="0" y="0" width="280" height="68" rx="999" fill="#3a1242" opacity="0.92"/>
+    <text x="34" y="45" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="800" fill="#fff4e8" letter-spacing="0.08em">RETRIEVAL + GEN</text>
+  </g>
+
+  <g transform="translate(425 355)" fill="none" stroke="#8b2fa6" stroke-width="6" stroke-linecap="round" opacity="0.9">
+    <path d="M0 34 C 55 0, 110 0, 165 34"/>
+    <path d="M0 34 C 55 68, 110 68, 165 34"/>
+  </g>
+
+  <g transform="translate(640 355)">
+    <rect x="0" y="0" width="240" height="68" rx="999" fill="#ffc857" opacity="0.95"/>
+    <text x="32" y="45" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="900" fill="#1b0b1e" letter-spacing="0.06em">QDRANT</text>
+  </g>
+
+  <g transform="translate(900 355)">
+    <rect x="0" y="0" width="210" height="68" rx="999" fill="#fff4e8" stroke="#1b0b1e" stroke-opacity="0.18" stroke-width="3"/>
+    <text x="32" y="45" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="850" fill="#51185b" letter-spacing="0.06em">STREAMLIT</text>
+  </g>
+</svg>

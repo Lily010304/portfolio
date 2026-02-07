@@ -45,6 +45,13 @@
 
   const normalizeKey = (value) => safeText(value).trim().toLowerCase().replace(/[^a-z0-9]/g, '');
 
+  const LOCAL_PROJECT_OVERRIDES = Object.freeze({
+    ragapp: {
+      description:
+        'RAG_APP (PDF Ingest + Qdrant + Gemini + Inngest + Streamlit). A small RAG (Retrieval-Augmented Generation) app.',
+    },
+  });
+
   const LOCAL_PROJECT_IMAGES = Object.freeze({
     'computervision': 'assets/images/Computer-Vision.png',
     'datavisualizationfirstproject': 'assets/images/Data-Visualization-First-Project.jpg',
@@ -61,6 +68,7 @@
     'sugarinyourblood': 'assets/images/SugarInYourBlood.jpg',
     'thirdprojectdv': 'assets/images/ThirdProjectDV.jpg',
     'timeloom': 'assets/images/time-loom.png',
+    'ragapp': 'assets/images/RAG_APP.svg',
     'youtuberagqa': 'assets/images/Youtube_RAG_QA.png',
   });
 
@@ -102,7 +110,8 @@
   const createProjectCard = (repo) => {
     const kind = guessKind(repo);
     const title = safeText(repo.name);
-    const desc = safeText(repo.description) || 'No description yet.';
+    const override = LOCAL_PROJECT_OVERRIDES[normalizeKey(title)] || null;
+    const desc = safeText(override?.description || repo.description) || 'No description yet.';
     const language = safeText(repo.language);
     const stars = Number(repo.stargazers_count || 0);
 
