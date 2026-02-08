@@ -45,6 +45,12 @@
 
   const normalizeKey = (value) => safeText(value).trim().toLowerCase().replace(/[^a-z0-9]/g, '');
 
+  const KIND_OVERRIDES = Object.freeze({
+    ragapp: 'ai',
+    genzsummarizer: 'ai',
+    computervision: 'ai',
+  });
+
   const FEATURED_REPOS = Object.freeze([
     'ragapp',
     'youtuberagqa',
@@ -93,13 +99,18 @@
   };
 
   const guessKind = (repo) => {
+    const overrideKind = KIND_OVERRIDES[normalizeKey(repo?.name)];
+    if (overrideKind) return overrideKind;
+
     const name = safeText(repo.name).toLowerCase();
     const desc = safeText(repo.description).toLowerCase();
     const homepage = safeText(repo.homepage).toLowerCase();
     const language = safeText(repo.language).toLowerCase();
     const topics = Array.isArray(repo.topics) ? repo.topics.map((t) => String(t).toLowerCase()) : [];
 
-    const haystack = [name, desc, homepage, language, ...topics].join(' ');
+    const haystack = [name, desc, homepage, language, ...topics]
+      .join(' ')
+      .replace(/[_/]+/g, ' ');
 
     const has = (re) => re.test(haystack);
 
