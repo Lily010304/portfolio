@@ -49,6 +49,7 @@
     ragapp: 'ai',
     genzsummarizer: 'ai',
     computervision: 'ai',
+    aiagent: 'ai',
   });
 
   const FEATURED_REPOS = Object.freeze([
@@ -85,6 +86,7 @@
     'timeloom': 'assets/images/time-loom.png',
     'ragapp': 'assets/images/RAG_APP.svg',
     'youtuberagqa': 'assets/images/Youtube_RAG_QA.png',
+    'aiagent': 'assets/images/AI_Agent.jpg',
   });
 
   const getLocalProjectImageUrl = (repoName) => {
