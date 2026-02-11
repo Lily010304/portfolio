@@ -57,7 +57,7 @@
     'youtuberagqa',
     'genzsummarizer',
     'finalsecondproject',
-    'datavisualizationsecondmidproject',
+    'aiagent',
     'fbigun',
   ]);
 
